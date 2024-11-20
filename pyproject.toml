@@ -1,0 +1,37 @@
+[build-system]
+build-backend = "poetry.core.masonry.api"
+requires = [ "poetry-core" ]
+
+[tool.poetry]
+name = "testpad-cli"
+version = "0.1.0"
+description = "CLI Tool for interacting with the TestPad API"
+authors = [ "Testpad <code@testpad.com>" ]
+license = "MIT"
+readme = "README.md"
+packages = [
+  { include = "testpad_cli" },
+]
+exclude = [ "**/tests/**", "**/testutils.py", "**/tests.py" ]
+classifiers = [
+  "Development Status :: 2 - Pre-Alpha",
+  "Programming Language :: Python :: 3.9",
+  "Programming Language :: Python :: 3.10",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+  "Programming Language :: Python :: 3.13",
+  "License :: OSI Approved :: MIT License",
+  "Environment :: Console",
+  "Intended Audience :: Developers",
+
+  "Topic :: Software Development :: Quality Assurance",
+  "Operating System :: OS Independent",
+]
+
+[tool.poetry.dependencies]
+python = "^3.9"
+click = "^8.1"
+
+[tool.poetry.group.dev.dependencies]
+pre-commit = "^4.0"
+twine = "^4.0"
