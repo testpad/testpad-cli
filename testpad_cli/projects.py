@@ -1,4 +1,12 @@
+import sys
+
+import click
+from tabulate import tabulate
+from testpad.exceptions import NotFound
+
 from .base_group import cli
+from .config import get_client
+from .renderers import PrettyRenderer
 
 
 @cli.group()
@@ -8,4 +16,31 @@ def project():
 
 @project.command(name="ls")
 def list_projects():
-    print("lala")
+    header = ["Id", "Name", "Description"]
+    rows = [
+        (project.id, project.name, project.description)
+        for project in get_client().list_projects()
+    ]
+    click.echo(tabulate(rows, headers=header))
+
+
+@project.command(name="show")
+@click.argument("project-id", type=int)
+def show_project(project_id):
+    client = get_client()
+
+    try:
+        proj_obj = client.get_project(project_id)
+    except NotFound:
+        error = click.style(
+            f"Project with ID {project_id} does not exist or you are not allowed to see it",
+            fg="red",
+        )
+        click.echo(error, err=True)
+        sys.exit(1)
+
+    click.echo(click.style(proj_obj.name, bold=True, underline=True))
+    click.echo(f"{proj_obj.description}\n")
+
+    folder = client.get_project_contents(project_id)
+    click.echo(PrettyRenderer().render_folder(folder))

@@ -5,7 +5,7 @@ requires = [ "poetry-core" ]
 [tool.poetry]
 name = "testpad-cli"
 version = "0.1.0"
-description = "CLI Tool for interacting with the TestPad API"
+description = "CLI Tool for interacting with the Testpad API"
 authors = [ "Testpad <code@testpad.com>" ]
 license = "MIT"
 readme = "README.md"
@@ -33,6 +33,7 @@ testpad = 'testpad_cli.entrypoint:cli'
 [tool.poetry.dependencies]
 python = "^3.9"
 click = "^8.1"
+tabulate = "^0.9.0"
 
 [tool.poetry.group.dev.dependencies]
 pre-commit = "^4.0"
