@@ -7,7 +7,7 @@ class JsonRenderer(BaseRenderer):
     def render_script(self, script: Script) -> str:
         pass
 
-    def render_folder(self, folder: Folder) -> str:
+    def render_contents(self, folder: Folder) -> str:
         pass
 
     def render_note(self, note: Note) -> str:

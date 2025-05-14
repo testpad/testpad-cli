@@ -18,15 +18,14 @@ def project():
 def list_projects():
     header = ["Id", "Name", "Description"]
     rows = [
-        (project.id, project.name, project.description)
-        for project in get_client().list_projects()
+        (proj.id, proj.name, proj.description) for proj in get_client().list_projects()
     ]
     click.echo(tabulate(rows, headers=header))
 
 
-@project.command(name="show")
+@project.command(name="get")
 @click.argument("project-id", type=int)
-def show_project(project_id):
+def get_project(project_id):
     client = get_client()
 
     try:
@@ -42,5 +41,5 @@ def show_project(project_id):
     click.echo(click.style(proj_obj.name, bold=True, underline=True))
     click.echo(f"{proj_obj.description}\n")
 
-    folder = client.get_project_contents(project_id)
-    click.echo(PrettyRenderer().render_folder(folder))
+    contents = client.get_project_contents(project_id)
+    click.echo(PrettyRenderer().render_contents(contents))

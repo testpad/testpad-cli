@@ -3,6 +3,7 @@
 # noqa
 from .base_group import cli
 from .projects import *
+from .runs import *
 from .scripts import *
 from .utils import *
 
